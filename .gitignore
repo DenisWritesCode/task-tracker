@@ -1,6 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-#Denis ignores these
+#Denis ignores this one.
 .package-lock.json
 
 # dependencies
