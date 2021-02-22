@@ -9,7 +9,7 @@
 - [ ] Connect to json-server
 - [ ] Toggle Add/Close Form
 - [x] Create form.
-- [ ] Delete elements.
+- [x] Delete elements.
 - [x] Double-click to activate.
 - [x] Style the components.
 - [x] Layout the different Components.
