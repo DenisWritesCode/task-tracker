@@ -26,12 +26,50 @@ const Tasks = () => {
             "reminder": false
           }
     ];
+
     const [tasks, setTasks] = useState(tasksArr);
+
+    const fetchTask = async (id) => {
+      const task = await tasks.filter( t => t.id === id);
+      return task;
+    }
+
+    const updateData = async (task) => {
+      const newData = await tasks.map((s_task) => {
+        // Compare id of current task(c_task) with id of passed task(task).
+        // If they match, then spread contents of c_task BUT change its reminder to look like that of passed task.
+        // It is this new task that we return.
+        // s_task.id === task.id ? { ...s_task, reminder: task.reminder } : s_task;
+      });
+
+      return newData;
+    }
+
+    const handleDoubleClick = async (id) => {
+
+      let taskToToggle = await fetchTask(id); //Returns an array. Don't know why though.
+      taskToToggle = taskToToggle[0]; // Remove from the array and make it an object.
+      // Flip the reminder of fetched task
+      const updTask = { ...taskToToggle, reminder : !taskToToggle.reminder }; 
+      // Update that task in array.
+      // const updatedTask = await updateData(updTask);
+      setTasks(
+        tasks.map((task) => {
+          return task.id === id ? {...task, reminder: updTask.reminder } : task;
+        })
+      );
+
+      // setTasks(updtArray);
+    }
 
     return ( 
         <div className="tasks-container">
             {tasks.map((task) => (
-                <Task task={task} key={task.id} />
+                <Task 
+                  key={task.id} 
+                  task={task} 
+                  handleDoubleClick={handleDoubleClick}
+                 />
             ))}
         </div>
         

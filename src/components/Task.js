@@ -1,13 +1,16 @@
-const Task = ({ task }) => {
+const Task = ({ task, handleDoubleClick }) => {
 
     return ( 
-        <div className={`task  ${task.reminder ? "reminder" : ""}`} >
+        <div 
+            className={`task  ${task.reminder ? "reminder" : ""}`}
+            onDoubleClick={() => { handleDoubleClick(task.id)}}
+        >
             <div className="content">
                 <h3> {task.title} </h3>
                 <p> {task.date} </p>
 
             </div>
-            <i class="fas fa-trash"></i>
+            <i className="fas fa-trash"></i>
         </div>
      );
 }

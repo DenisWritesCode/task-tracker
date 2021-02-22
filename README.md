@@ -8,8 +8,8 @@
 - [ ] CRUD Applications.
 - [ ] Connect to json-server
 - [ ] Toggle Add/Close Form
-- [ ] Create form.
+- [x] Create form.
 - [ ] Delete elements.
-- [ ] Double-click to activate.
+- [x] Double-click to activate.
 - [x] Style the components.
 - [x] Layout the different Components.
