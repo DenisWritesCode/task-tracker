@@ -11,5 +11,5 @@
 - [ ] Create form.
 - [ ] Delete elements.
 - [ ] Double-click to activate.
-- [ ] Style the components.
-- [ ] Layout the different Components.
+- [x] Style the components.
+- [x] Layout the different Components.

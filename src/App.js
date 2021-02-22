@@ -1,7 +1,15 @@
+import Form from "./components/Form";
+import Header from "./components/Header";
+import Tasks from "./components/Tasks";
+
 function App() {
   return (
     <div className="App">
-      <h2>Denis was here</h2>
+    <div className="container">
+      <Header />
+      <Tasks />
+      <Form />
+    </div>
     </div>
   );
 }
