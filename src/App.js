@@ -74,16 +74,10 @@ function App() {
       method: 'DELETE',
     });
 
-    // Check whether the de
-
-
-
-    // Delete it from our display DATA
-    setTasks (
-      tasks.filter((task) => {
-        return task.id !== id;
-      })
-    );
+    // Check whether the delete was a sucess.
+    res.status === 200 // 200 is return status of OK.
+    ? setTasks(tasks.filter((task) => task.id !== id)) // Delete Task from display.
+    : alert("Couldn't delete that task");
   }
 
   return (
