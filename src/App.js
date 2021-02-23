@@ -42,24 +42,43 @@ function App() {
   // Handle Double Click to activate an event.
   const handleDoubleClick = async (id) => {
 
-    const taskToToggle = await fetchTask(id); //Returns an array. Don't know why though.
+    const taskToToggle = await fetchTask(id); //Fetch task from db.
     // Flip the reminder of fetched task
     const updTask = { ...taskToToggle, reminder : !taskToToggle.reminder }; 
-    // Update that task in array.
-    console.log(updTask);
+
+    // Put updated version of Task in DB.
+    const res = await fetch(`http://localhost:5000/tasks/${id}`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(updTask)
+    });
+
+    // Get updated task from DB for updating the one we are displaying.
+    const data = await res.json();
+
+    // Update that task in display.
     setTasks(
       tasks.map((task) => {
-        return task.id === id ? {...task, reminder: updTask.reminder } : task;
+        return task.id === id ? {...task, reminder: data.reminder } : task;
       })
     );
   }
 
   // Allow user to click on the delete icon.
   const handleDelete = async (id) => {
-    let taskToDelete = await fetchTask(id);
-    taskToDelete = taskToDelete[0];
+    const taskToDelete = await fetchTask(id); //Fetch task to Delete.
 
-    // Delete it.
+    const res = await fetch(`http://localhost:5000/tasks/${id}`, {
+      method: 'DELETE',
+    });
+
+    // Check whether the de
+
+
+
+    // Delete it from our display DATA
     setTasks (
       tasks.filter((task) => {
         return task.id !== id;
