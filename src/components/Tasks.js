@@ -62,6 +62,18 @@ const Tasks = () => {
       // setTasks(updtArray);
     }
 
+    const handleDelete = async (id) => {
+      let taskToDelete = await fetchTask(id);
+      taskToDelete = taskToDelete[0];
+
+      // Delete it.
+      setTasks (
+        tasks.filter((task) => {
+          return task.id !== id;
+        })
+      );
+    }
+
     return ( 
         <div className="tasks-container">
             {tasks.map((task) => (
@@ -69,6 +81,7 @@ const Tasks = () => {
                   key={task.id} 
                   task={task} 
                   handleDoubleClick={handleDoubleClick}
+                  handleDelete={handleDelete}
                  />
             ))}
         </div>

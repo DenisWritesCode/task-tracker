@@ -1,4 +1,4 @@
-const Task = ({ task, handleDoubleClick }) => {
+const Task = ({ task, handleDoubleClick, handleDelete }) => {
 
     return ( 
         <div 
@@ -10,7 +10,7 @@ const Task = ({ task, handleDoubleClick }) => {
                 <p> {task.date} </p>
 
             </div>
-            <i className="fas fa-trash"></i>
+            <i onClick={() => handleDelete(task.id)} className="fas fa-trash"></i>
         </div>
      );
 }
