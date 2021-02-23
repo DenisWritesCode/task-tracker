@@ -42,29 +42,55 @@ function App() {
   // Handle Double Click to activate an event.
   const handleDoubleClick = async (id) => {
 
-    const taskToToggle = await fetchTask(id); //Returns an array. Don't know why though.
+    const taskToToggle = await fetchTask(id); //Fetch task from db.
     // Flip the reminder of fetched task
     const updTask = { ...taskToToggle, reminder : !taskToToggle.reminder }; 
-    // Update that task in array.
-    console.log(updTask);
+
+    // Put updated version of Task in DB.
+    const res = await fetch(`http://localhost:5000/tasks/${id}`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(updTask)
+    });
+
+    // Get updated task from DB for updating the one we are displaying.
+    const data = await res.json();
+
+    // Update that task in display.
     setTasks(
       tasks.map((task) => {
-        return task.id === id ? {...task, reminder: updTask.reminder } : task;
+        return task.id === id ? {...task, reminder: data.reminder } : task;
       })
     );
   }
 
   // Allow user to click on the delete icon.
   const handleDelete = async (id) => {
-    let taskToDelete = await fetchTask(id);
-    taskToDelete = taskToDelete[0];
+    const res = await fetch(`http://localhost:5000/tasks/${id}`, {
+      method: 'DELETE',
+    });
 
-    // Delete it.
-    setTasks (
-      tasks.filter((task) => {
-        return task.id !== id;
-      })
-    );
+    // Check whether the delete was a sucess.
+    res.status === 200 // 200 is return status of OK.
+    ? setTasks(tasks.filter((task) => task.id !== id)) // Delete Task from display.
+    : alert("Couldn't delete that task");
+  }
+
+  // Add task to DB from Form.
+  const addTask = async (task) => {
+    const res = await fetch('http://localhost:5000/tasks', {
+      method: 'POST',
+      headers: {
+        'content-type' : 'application/json',
+      },
+      body: JSON.stringify(task)
+    });
+
+    const data = await res.json();
+    setTasks([...tasks, data]); // Add our new task to array to display.
+
   }
 
   return (
@@ -79,7 +105,8 @@ function App() {
         handleDoubleClick = {handleDoubleClick}
         tasks = {tasks}
       />
-      { showForm && <Form /> }
+      { showForm && <Form 
+      addTask = { addTask } /> }
     </div>
     </div>
   );
