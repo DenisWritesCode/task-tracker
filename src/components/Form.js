@@ -2,23 +2,23 @@ import { useState } from 'react';
 
 const Form = ({ addTask }) => {
 
-    const [task, setTask] = useState('');
-    const [day, setDay] = useState('');
+    const [title, setTitle] = useState('');
+    const [date, setDate] = useState('');
     const [reminder, setReminder] = useState(false);
 
     const onSubmit = (e) => {
         e.preventDefault(); // No funny page reloads.
 
-        if (!task) {
+        if (!title) {
             alert("Task must have a name");
             return;
         }
 
-        addTask({task, day, reminder}) // Set a new Task.
+        addTask({title, date, reminder}) // Set a new Task.
         
         // We could not use e.reset(); since the input fields are controlled.
-        setTask('');
-        setDay('');
+        setTitle('');
+        setDate('');
         setReminder(false);
         
     }
@@ -31,7 +31,7 @@ const Form = ({ addTask }) => {
 
                 <label htmlFor="title">Title</label>
                 <input type="text" placeholder="Activity..." 
-                    value={task} onChange={(e) => setTask(e.target.value)}
+                    value={title} onChange={(e) => setTitle(e.target.value)}
 
                 />
                 </div>
@@ -40,7 +40,7 @@ const Form = ({ addTask }) => {
 
                 <label htmlFor="date">Date & Time</label>
                 <input type="text" placeholder="Date & Time"
-                    value={day} onChange={(e) => setDay(e.target.value)}
+                    value={date} onChange={(e) => setDate(e.target.value)}
                  />
                 </div>
 
