@@ -7,7 +7,7 @@
 - [ ] Routing.
 - [ ] CRUD Applications.
 - [ ] Connect to json-server
-- [ ] Toggle Add/Close Form
+- [x] Toggle Add/Close Form
 - [x] Create form.
 - [x] Delete elements.
 - [x] Double-click to activate.

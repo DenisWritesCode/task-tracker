@@ -1,9 +1,14 @@
-const Header = () => {
+const Header = ({ showForm, toggleForm }) => {
+
     return ( 
         <header>
         <div className="top">
             <h1>Task-Tracker</h1>
-            <button className="btn">Add</button>
+            { showForm && <button className="btn" style={{backgroundColor: "red"}}
+                    onClick={() => toggleForm()}>
+                Close
+            </button> }
+            { !showForm && <button onClick={() => toggleForm()} className="btn" style={{backgroundColor: "green"}}>Add</button>}
         </div>
 
         <div className="bottom">
