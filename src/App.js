@@ -68,8 +68,6 @@ function App() {
 
   // Allow user to click on the delete icon.
   const handleDelete = async (id) => {
-    const taskToDelete = await fetchTask(id); //Fetch task to Delete.
-
     const res = await fetch(`http://localhost:5000/tasks/${id}`, {
       method: 'DELETE',
     });
@@ -78,6 +76,21 @@ function App() {
     res.status === 200 // 200 is return status of OK.
     ? setTasks(tasks.filter((task) => task.id !== id)) // Delete Task from display.
     : alert("Couldn't delete that task");
+  }
+
+  // Add task to DB from Form.
+  const addTask = async (task) => {
+    const res = await fetch('http://localhost:5000/tasks', {
+      method: 'POST',
+      headers: {
+        'content-type' : 'application/json',
+      },
+      body: JSON.stringify(task)
+    });
+
+    const data = await res.json();
+    setTasks([...tasks, data]); // Add our new task to array to display.
+
   }
 
   return (
@@ -92,7 +105,8 @@ function App() {
         handleDoubleClick = {handleDoubleClick}
         tasks = {tasks}
       />
-      { showForm && <Form /> }
+      { showForm && <Form 
+      addTask = { addTask } /> }
     </div>
     </div>
   );

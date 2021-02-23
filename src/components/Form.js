@@ -1,4 +1,7 @@
-const Form = () => {
+const Form = ({ addTask }) => {
+
+    
+
     return ( 
         <div className="form-container">
             <form>
