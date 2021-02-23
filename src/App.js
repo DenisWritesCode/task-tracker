@@ -50,7 +50,7 @@ function App() {
     const res = await fetch(`http://localhost:5000/tasks/${id}`, {
       method: 'PUT',
       headers: {
-        'content-type': 'application/json',
+        'Content-type': 'application/json',
       },
       body: JSON.stringify(updTask)
     });
@@ -83,14 +83,13 @@ function App() {
     const res = await fetch('http://localhost:5000/tasks', {
       method: 'POST',
       headers: {
-        'content-type' : 'application/json',
+        'Content-type' : 'application/json',
       },
       body: JSON.stringify(task)
     });
 
     const data = await res.json();
-    setTasks([...tasks, data]); // Add our new task to array to display.
-
+    setTasks([...tasks, data]); // Add our new task to array to display.    
   }
 
   return (
@@ -101,9 +100,9 @@ function App() {
         showForm = {showForm}
       />
       <Tasks 
+        tasks = {tasks}
         handleDelete = {handleDelete}
         handleDoubleClick = {handleDoubleClick}
-        tasks = {tasks}
       />
       { showForm && <Form 
       addTask = { addTask } /> }

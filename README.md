@@ -5,7 +5,7 @@
 ## To-Do List
 - [ ] Countdown feature.
 - [ ] Routing.
-- [ ] CRUD Applications.
+- [x] CRUD Operations.
 - [x] Connect to json-server
 - [x] Toggle Add/Close Form
 - [x] Create form.
